@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Garis Singgung, Kecepatan Sesaat, Kemonotonan & Kecekungan</title>
     <meta name="description" content="Website untuk menganalisis grafik fungsi matematika dengan garis singgung, kecepatan sesaat, kemonotonan, dan kecekungan. Dilengkapi visualisasi" />
-    <meta name="keywords" content="matematika, grafik fungsi, garis singgung, kecepatan sesaat, kemonotonan, kecekungan, turunan, kalkulus, apexcharts, analisis fungsi" />
-    <meta name="author" content="Matematika Interaktif" />
+    <meta name="keywords" content="matematika, grafik fungsi, garis singgung, kecepatan sesaat, kemonotonan, kecekungan, turunan, kalkulus" />
     <link rel="canonical" href="https://example.com/analisis-grafik-fungsi/" />
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ƒ</text></svg>" />
 
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
-  <body class="bg-gray-100 min-h-screen p-4 md:p-8">
-    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
+  <body class="bg-gray-100 min-h-screen md:p-6 relative">
+    <header class="mt-4 mb-6">
       <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Visualisasi</h1>
-      <p class="text-center text-gray-600 mb-6">Garis Singgung, Kecepatan Sesaat, Kemonotonan, dan Kecekungan</p>
+      <p class="text-center text-gray-600">Garis Singgung, Kecepatan Sesaat, Kemonotonan, dan Kecekungan</p>
+    </header>
 
+    <main class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-1 bg-gray-50 p-4 rounded-lg">
-          <h2 class="text-xl font-semibold mb-4 text-gray-700">Pengaturan Fungsi</h2>
-
+        <div class="mt-6 p-4 bg-white border border-gray-200 rounded-lg">
           <div class="mb-6">
             <h3 class="font-medium text-gray-700 mb-2">Jenis Fungsi</h3>
             <select id="functionType" class="w-full p-2 border rounded bg-white">
@@ -149,16 +150,16 @@
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-sm text-gray-600 mb-1">x min</label>
-                <input type="number" id="xMin" value="-5" class="w-full p-2 border rounded" />
+                <input type="number" id="xMin" value="-5" class="w-full p-2 border rounded outline-none transition-colors focus-visible" />
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">x max</label>
-                <input type="number" id="xMax" value="5" class="w-full p-2 border rounded" />
+                <input type="number" id="xMax" value="5" class="w-full p-2 border rounded outline-none transition-colors focus-visible" />
               </div>
             </div>
           </div>
 
-          <button id="resetBtn" class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">Reset ke Default</button>
+          <button id="resetBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible w-full">Reset ke Default</button>
         </div>
 
         <div class="lg:col-span-2">
@@ -201,20 +202,37 @@
               </div>
             </div>
           </div>
-
-          <div class="mt-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <h3 class="font-semibold text-gray-700 mb-2">Penjelasan</h3>
-            <ul class="text-sm text-gray-600 space-y-2">
-              <li><span class="font-medium">Garis Singgung:</span> Garis yang menyentuh kurva di satu titik tanpa memotongnya.</li>
-              <li><span class="font-medium">Kecepatan Sesaat:</span> Nilai turunan pertama di titik tertentu, merepresentasikan kemiringan garis singgung.</li>
-              <li><span class="font-medium">Kemonotonan:</span> Menentukan apakah fungsi naik atau turun pada interval tertentu.</li>
-              <li><span class="font-medium">Kecekungan:</span> Menentukan arah lengkungan fungsi (cekung ke atas atau ke bawah).</li>
-            </ul>
-          </div>
         </div>
       </div>
-    </div>
+      <section class="mt-8 bg-white lg:p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h3 class="text-lg font-semibold mb-2 text-blue-700">Garis Singgung</h3>
+            <p class="text-sm text-gray-700">Garis lurus yang hanya menyentuh kurva di satu titik. Dalam gerak parabola, garis singgung di titik tertentu menunjukkan arah gerak benda pada titik tersebut.</p>
+          </div>
 
-    <script src="./script.js"></script>
+          <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+            <h3 class="text-lg font-semibold mb-2 text-green-700">Kecepatan Sesaat</h3>
+            <p class="text-sm text-gray-700">Nilai turunan pertama dari fungsi posisi terhadap waktu. Dalam game, kecepatan sesaat panah berubah setiap saat karena pengaruh gravitasi.</p>
+          </div>
+
+          <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <h3 class="text-lg font-semibold mb-2 text-yellow-700">Kemonotonan</h3>
+            <p class="text-sm text-gray-700">Sifat fungsi yang menggambarkan apakah fungsi tersebut naik, turun, atau konstan. Dalam lintasan panah, kemonotonan berubah dari naik ke turun.</p>
+          </div>
+
+          <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <h3 class="text-lg font-semibold mb-2 text-purple-700">Kecekungan</h3>
+            <p class="text-sm text-gray-700">Sifat fungsi yang menggambarkan lengkungan grafik. Lintasan panah memiliki kecekungan negatif (cekung ke bawah) karena pengaruh gravitasi.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <a href="./game.html">
+      <img class="absolute right-0 bottom-0 w-[15%] md:w-[5%]" src="/video/chip-unscreen.gif" alt="cip" />
+    </a>
+
+    <script src="./js/script.js"></script>
   </body>
 </html>
