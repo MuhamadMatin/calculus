@@ -138,9 +138,19 @@ function updateAnalysis() {
     }
     document.getElementById('tangentInfo').textContent = `Persamaan: y = ${tangentLine}`;
     document.getElementById('slopeInfo').textContent = `Kemiringan: ${fpx.toFixed(2)}`;
+
+    // Perbarui perhitungan garis singgung
+    document.getElementById('tangentCalculation').innerHTML = `
+                    <strong>Perhitungan untuk x = ${tangentX.toFixed(1)}:</strong><br>
+                    1. f(${tangentX.toFixed(1)}) = ${fx.toFixed(2)}<br>
+                    2. f'(${tangentX.toFixed(1)}) = ${fpx.toFixed(2)}<br>
+                    3. Persamaan: y - ${fx.toFixed(2)} = ${fpx.toFixed(2)}(x - ${tangentX.toFixed(1)})<br>
+                    4. Sederhanakan: y = ${fpx.toFixed(2)}x ${tangentIntercept >= 0 ? '+' : '-'} ${Math.abs(tangentIntercept).toFixed(2)}
+                `;
   } else {
     document.getElementById('tangentInfo').textContent = 'Garis singgung tidak terdefinisi';
     document.getElementById('slopeInfo').textContent = 'Kemiringan: -';
+    document.getElementById('tangentCalculation').innerHTML = 'Tidak dapat menghitung garis singgung pada titik ini.';
   }
 
   // Kemonotonan
@@ -149,16 +159,38 @@ function updateAnalysis() {
     if (fpx > 0) {
       monotonicityElement.textContent = 'Fungsi naik di sekitar titik ini';
       monotonicityElement.className = 'text-sm text-green-700 mt-1';
+
+      // Perbarui perhitungan kemonotonan
+      document.getElementById('monotonicityCalculation').innerHTML = `
+                        <strong>Perhitungan:</strong><br>
+                        f'(${tangentX.toFixed(1)}) = ${fpx.toFixed(2)} > 0<br>
+                        Jadi fungsi <strong>naik</strong> di sekitar x = ${tangentX.toFixed(1)}
+                    `;
     } else if (fpx < 0) {
       monotonicityElement.textContent = 'Fungsi turun di sekitar titik ini';
       monotonicityElement.className = 'text-sm text-red-700 mt-1';
+
+      // Perbarui perhitungan kemonotonan
+      document.getElementById('monotonicityCalculation').innerHTML = `
+                        <strong>Perhitungan:</strong><br>
+                        f'(${tangentX.toFixed(1)}) = ${fpx.toFixed(2)} < 0<br>
+                        Jadi fungsi <strong>turun</strong> di sekitar x = ${tangentX.toFixed(1)}
+                    `;
     } else {
       monotonicityElement.textContent = 'Fungsi stasioner di titik ini';
       monotonicityElement.className = 'text-sm text-yellow-700 mt-1';
+
+      // Perbarui perhitungan kemonotonan
+      document.getElementById('monotonicityCalculation').innerHTML = `
+                        <strong>Perhitungan:</strong><br>
+                        f'(${tangentX.toFixed(1)}) = ${fpx.toFixed(2)} = 0<br>
+                        Jadi fungsi <strong>stasioner</strong> di x = ${tangentX.toFixed(1)}
+                    `;
     }
   } else {
     monotonicityElement.textContent = 'Kemonotonan tidak terdefinisi';
     monotonicityElement.className = 'text-sm text-gray-700 mt-1';
+    document.getElementById('monotonicityCalculation').innerHTML = 'Tidak dapat menentukan kemonotonan pada titik ini.';
   }
 
   // Kecekungan
@@ -167,16 +199,53 @@ function updateAnalysis() {
     if (fdpx > 0) {
       concavityElement.textContent = 'Fungsi cekung ke atas di sekitar titik ini';
       concavityElement.className = 'text-sm text-purple-700 mt-1';
+
+      // Perbarui perhitungan kecekungan
+      document.getElementById('concavityCalculation').innerHTML = `
+                        <strong>Perhitungan:</strong><br>
+                        f''(${tangentX.toFixed(1)}) = ${fdpx.toFixed(2)} > 0<br>
+                        Jadi fungsi <strong>cekung ke atas</strong> di sekitar x = ${tangentX.toFixed(1)}
+                    `;
     } else if (fdpx < 0) {
       concavityElement.textContent = 'Fungsi cekung ke bawah di sekitar titik ini';
       concavityElement.className = 'text-sm text-purple-700 mt-1';
+
+      // Perbarui perhitungan kecekungan
+      document.getElementById('concavityCalculation').innerHTML = `
+                        <strong>Perhitungan:</strong><br>
+                        f''(${tangentX.toFixed(1)}) = ${fdpx.toFixed(2)} < 0<br>
+                        Jadi fungsi <strong>cekung ke bawah</strong> di sekitar x = ${tangentX.toFixed(1)}
+                    `;
     } else {
       concavityElement.textContent = 'Tidak ada kecekungan di titik ini';
       concavityElement.className = 'text-sm text-gray-700 mt-1';
+
+      // Perbarui perhitungan kecekungan
+      document.getElementById('concavityCalculation').innerHTML = `
+                        <strong>Perhitungan:</strong><br>
+                        f''(${tangentX.toFixed(1)}) = ${fdpx.toFixed(2)} = 0<br>
+                        Titik ini mungkin merupakan <strong>titik belok</strong>
+                    `;
     }
   } else {
     concavityElement.textContent = 'Kecekungan tidak terdefinisi';
     concavityElement.className = 'text-sm text-gray-700 mt-1';
+    document.getElementById('concavityCalculation').innerHTML = 'Tidak dapat menentukan kecekungan pada titik ini.';
+  }
+
+  // Kecepatan Sesaat
+  const velocityElement = document.getElementById('instantVelocityInfo');
+  if (!isNaN(fpx)) {
+    velocityElement.textContent = `Kecepatan sesaat: ${fpx.toFixed(2)}`;
+
+    // Perbarui perhitungan kecepatan sesaat
+    document.getElementById('velocityCalculation').innerHTML = `
+                    <strong>Perhitungan:</strong><br>
+                    Kecepatan sesaat = f'(${tangentX.toFixed(1)}) = ${fpx.toFixed(2)}
+                `;
+  } else {
+    velocityElement.textContent = 'Kecepatan sesaat tidak terdefinisi';
+    document.getElementById('velocityCalculation').innerHTML = 'Tidak dapat menghitung kecepatan sesaat pada titik ini.';
   }
 }
 
@@ -331,6 +400,24 @@ function showFunctionParams() {
   updateValues();
 }
 
+// Fungsi untuk toggle penjelasan
+function setupExplanationToggles() {
+  document.querySelectorAll('.explanation-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      target.classList.toggle('expanded');
+
+      // Ubah teks tombol
+      if (target.classList.contains('expanded')) {
+        this.textContent = this.textContent.replace('▼', '▲');
+      } else {
+        this.textContent = this.textContent.replace('▲', '▼');
+      }
+    });
+  });
+}
+
 // Event listeners
 document.getElementById('functionType').addEventListener('change', showFunctionParams);
 
@@ -370,3 +457,4 @@ document.getElementById('resetBtn').addEventListener('click', function () {
 
 // Inisialisasi
 showFunctionParams();
+setupExplanationToggles();
