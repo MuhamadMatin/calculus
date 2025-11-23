@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Road | Visualisasi Matematika</title>
+    <meta name="description" content="Game edukasi tentang konsep garis singgung, kecepatan sesaat, kemonotonan, dan kecekungan melalui simulasi roda di jalan" />
+    <meta name="keywords" content="game edukasi, garis singgung, kecepatan sesaat, kemonotonan, kecekungan, roda, jalan, kalkulus" />
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛞</text></svg>" />
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body class="bg-gray-100 min-h-screen md:p-6 relative">
+    <header class="mb-6 mt-4">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Bumpy Road</h1>
+      <p class="text-center text-gray-600">Simulasi jalan Surabaya dengan Kemonotonan, dan Kecekungan</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2">
+          <div class="bg-white p-4 rounded-lg border border-gray-200 relative overflow-hidden">
+            <div class="flex justify-between mb-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800" id="score">0</div>
+                <div class="text-sm text-gray-600">Skor</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800" id="distance">0</div>
+                <div class="text-sm text-gray-600">Jarak</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800" id="speed">0</div>
+                <div class="text-sm text-gray-600">Kecepatan</div>
+              </div>
+            </div>
+
+            <!-- Canvas Game -->
+            <div class="relative bg-gray-100 rounded-lg overflow-hidden" style="height: 400px">
+              <canvas id="gameCanvas" width="800" height="400" class="w-full h-full"></canvas>
+
+              <!-- Popup Sukses -->
+              <div id="successPopup" class="success-popup absolute inset-0 flex items-center justify-center hidden">
+                <div class="bg-green-500 text-white text-xl font-bold py-3 px-6 rounded-full shadow-lg">Berhasil MendapatkanPoin</div>
+              </div>
+
+              <!-- Popup Jalan Rusak -->
+              <div id="roadDamagePopup" class="popup">Roda bocor karena jalan rusak!</div>
+
+              <!-- Popup Jalan Rusak Ringan -->
+              <div id="roadDamageLightPopup" class="popup">Jalan rusak ringan!</div>
+
+              <!-- Popup Jalan Bergelombang -->
+              <div id="bumpyRoadPopup" class="popup">Shock rusak karena jalan bergelombang!</div>
+
+              <!-- Game Over -->
+              <div id="gameOver" class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+                <div class="bg-white p-6 rounded-lg text-center">
+                  <h2 class="text-2xl font-bold text-gray-800 mb-4">Permainan Selesai!</h2>
+                  <p class="text-gray-600 mb-2">Skor Akhir: <span id="finalScore" class="font-bold">0</span></p>
+                  <p class="text-gray-600 mb-4">Jarak Tempuh: <span id="finalDistance" class="font-bold">0</span></p>
+                  <button id="restartBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">Main Lagi</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 grid-cols-1 md:grid-cols-2 gap-4 text-sm md:grid hidden">
+              <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <h4 class="font-semibold text-blue-700 mb-2">Kemonotonan</h4>
+                <p class="text-gray-700">Sifat fungsi yang menggambarkan apakah fungsi tersebut naik, turun, atau konstan. Dalam game ini, kemonotonan mempengaruhi kecepatan roda.</p>
+              </div>
+              <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                <h4 class="font-semibold text-purple-700 mb-2">Kecekungan</h4>
+                <p class="text-gray-700">Sifat fungsi yang menggambarkan lengkungan grafik. Dalam game ini, kecekungan mempengaruhi percepatan roda.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-1 bg-gray-50 p-4 rounded-lg">
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Mode Pembuatan Jalan</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="drawBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible">Gambar</button>
+                <button id="randomBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 rounded transition-colors focus-visible">Acak</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Kecepatan Awal</label>
+              <input type="range" id="velocity" min="1" max="10" value="5" class="w-full" />
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>1</span>
+                <span id="velocityValue">5</span>
+                <span>10</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Kesulitan</label>
+              <input type="range" id="difficulty" min="1" max="10" value="5" class="w-full" />
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>1</span>
+                <span id="difficultyValue">5</span>
+                <span>10</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <button id="startBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible">Mulai</button>
+              <button id="clearBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 rounded transition-colors focus-visible">Reset</button>
+            </div>
+
+            <div class="mt-6 p-4 bg-white border border-gray-200 rounded-lg">
+              <h3 class="text-lg font-medium text-gray-700 mb-3 text-center">Analisis</h3>
+              <div class="space-y-2 text-sm">
+                <div class="flex flex-col w-full">
+                  <span class="text-gray-600">Status:</span>
+                  <span id="status" class="font-medium text-gray-800">Gambar jalan untuk memulai</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kemonotonan:</span>
+                  <span id="monotonicity" class="font-medium text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kecekungan:</span>
+                  <span id="concavity" class="font-medium text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Slope:</span>
+                  <span id="slope" class="font-mono text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kecepatan:</span>
+                  <span id="currentSpeed" class="font-mono text-gray-800">-</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 grid-cols-1 md:grid-cols-2 gap-4 text-sm md:hidden grid">
+              <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <h4 class="font-semibold text-blue-700 mb-2">Kemonotonan</h4>
+                <p class="text-gray-700">Sifat fungsi yang menggambarkan apakah fungsi tersebut naik, turun, atau konstan. Dalam game ini, kemonotonan mempengaruhi kecepatan roda.</p>
+              </div>
+              <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                <h4 class="font-semibold text-purple-700 mb-2">Kecekungan</h4>
+                <p class="text-gray-700">Sifat fungsi yang menggambarkan lengkungan grafik. Dalam game ini, kecekungan mempengaruhi percepatan roda.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="mt-8 text-center">
+      <a href="./index.html" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg transition-colors no-print"> ← Back</a>
+    </div>
+
+    <script src="./js/road.js"></script>
+  </body>
+</html>
