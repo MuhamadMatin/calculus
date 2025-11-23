@@ -1,7 +1,7 @@
-# Calculus
+<h1 id="title">Calculus</h1>
 
-Website yang digunakan untuk mem-visualisasikan Garis Singgung, Kecepatan Sesaat, Kemonotonan, dan Kecekungan
+<p id="description">Website yang digunakan untuk mem-visualisasikan Garis Singgung Kecepatan Sesaat Kemonotonan dan Kecekungan</p>
 
-## Link
+<h2>🚀 Website</h2>
 
-[Access Website 🚀](https://muhamadmatin.github.io/calculus)
+[https://muhamadmatin.github.io/calculus](https://muhamadmatin.github.io/calculus)
