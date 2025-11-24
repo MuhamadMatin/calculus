@@ -22,154 +22,171 @@
 
     <main class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="p-4 bg-white border border-gray-200 rounded-lg h-fit">
-          <!-- Kontrol panel tetap sama -->
-          <div class="mb-6">
-            <h3 class="font-medium text-gray-700 mb-2">Jenis Fungsi</h3>
-            <select id="functionType" class="w-full p-2 border rounded bg-white">
-              <option value="polynomial">Polinomial (ax² + bx + c)</option>
-              <option value="sinus">Sinus (a sin(bx))</option>
-              <option value="exponential">Eksponensial (a e^(bx))</option>
-              <option value="logarithm">Logaritma (a ln(bx))</option>
-            </select>
-          </div>
-
-          <div class="mb-6">
-            <h3 class="font-medium text-gray-700 mb-2">Parameter Fungsi</h3>
-            <div id="functionParams" class="space-y-3">
-              <!-- Parameter Polinomial -->
-              <div class="function-param polynomial">
-                <label class="block text-sm text-gray-600 mb-1">Koefisien x² (a)</label>
-                <input type="range" min="-5" max="5" value="1" step="0.1" id="polyA" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-5</span>
-                  <span id="polyAValue">1.0</span>
-                  <span>5</span>
-                </div>
-              </div>
-
-              <div class="function-param polynomial">
-                <label class="block text-sm text-gray-600 mb-1">Koefisien x (b)</label>
-                <input type="range" min="-5" max="5" value="0" step="0.1" id="polyB" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-5</span>
-                  <span id="polyBValue">0.0</span>
-                  <span>5</span>
-                </div>
-              </div>
-
-              <div class="function-param polynomial">
-                <label class="block text-sm text-gray-600 mb-1">Konstanta (c)</label>
-                <input type="range" min="-5" max="5" value="0" step="0.1" id="polyC" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-5</span>
-                  <span id="polyCValue">0.0</span>
-                  <span>5</span>
-                </div>
-              </div>
-
-              <!-- Parameter Sinus -->
-              <div class="function-param sinus hidden">
-                <label class="block text-sm text-gray-600 mb-1">Amplitudo (a)</label>
-                <input type="range" min="-3" max="3" value="1" step="0.1" id="sinA" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-3</span>
-                  <span id="sinAValue">1.0</span>
-                  <span>3</span>
-                </div>
-              </div>
-
-              <div class="function-param sinus hidden">
-                <label class="block text-sm text-gray-600 mb-1">Frekuensi (b)</label>
-                <input type="range" min="0.1" max="5" value="1" step="0.1" id="sinB" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>0.1</span>
-                  <span id="sinBValue">1.0</span>
-                  <span>5</span>
-                </div>
-              </div>
-
-              <!-- Parameter Eksponensial -->
-              <div class="function-param exponential hidden">
-                <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
-                <input type="range" min="0.1" max="3" value="1" step="0.1" id="expA" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>0.1</span>
-                  <span id="expAValue">1.0</span>
-                  <span>3</span>
-                </div>
-              </div>
-
-              <div class="function-param exponential hidden">
-                <label class="block text-sm text-gray-600 mb-1">Eksponen (b)</label>
-                <input type="range" min="-1" max="1" value="0.5" step="0.1" id="expB" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-1</span>
-                  <span id="expBValue">0.5</span>
-                  <span>1</span>
-                </div>
-              </div>
-
-              <!-- Parameter Logaritma -->
-              <div class="function-param logarithm hidden">
-                <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
-                <input type="range" min="-3" max="3" value="1" step="0.1" id="logA" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-3</span>
-                  <span id="logAValue">1.0</span>
-                  <span>3</span>
-                </div>
-              </div>
-
-              <div class="function-param logarithm hidden">
-                <label class="block text-sm text-gray-600 mb-1">Parameter (b)</label>
-                <input type="range" min="0.1" max="3" value="1" step="0.1" id="logB" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>0.1</span>
-                  <span id="logBValue">1.0</span>
-                  <span>3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-6">
-            <h3 class="font-medium text-gray-700 mb-2">Titik Garis Singgung</h3>
-            <div>
-              <label class="block text-sm text-gray-600 mb-1">Nilai x</label>
-              <input type="range" min="-5" max="5" value="1" step="0.1" id="tangentPoint" class="w-full" />
-              <div class="flex justify-between text-xs text-gray-500">
-                <span>-5</span>
-                <span id="tangentPointValue">1.0</span>
-                <span>5</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-6">
-            <h3 class="font-medium text-gray-700 mb-2">Rentang Grafik</h3>
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-sm text-gray-600 mb-1">x min</label>
-                <input type="number" id="xMin" value="-5" class="w-full p-2 border rounded outline-none transition-colors focus-visible" />
-              </div>
-              <div>
-                <label class="block text-sm text-gray-600 mb-1">x max</label>
-                <input type="number" id="xMax" value="5" class="w-full p-2 border rounded outline-none transition-colors focus-visible" />
-              </div>
-            </div>
-          </div>
-
-          <button id="resetBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible w-full">Reset ke Default</button>
-        </div>
-
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 lg:gap-6">
+          <!-- <div class="lg:col-span-2"> -->
           <!-- Grafik -->
-          <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6">
-            <div id="chart" class="h-80"></div>
+          <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 lg:col-span-2">
+            <div id="chart" class="md:h-72 h-80 lg:h-full"></div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Kontrol panel-->
+          <div class="p-4 bg-white border border-gray-200 rounded-lg h-fit lg:col-span-1">
+            <div class="mb-6">
+              <h3 class="font-medium text-gray-700 mb-2">Jenis Fungsi</h3>
+              <select id="functionType" class="w-full p-2 border rounded bg-white">
+                <option value="polynomial">Polinomial (ax² + bx + c)</option>
+                <option value="sinus">Sinus (a sin(bx))</option>
+                <option value="exponential">Eksponensial (a e^(bx))</option>
+                <option value="logarithm">Logaritma (a ln(bx))</option>
+              </select>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-medium text-gray-700 mb-2">Parameter Fungsi</h3>
+              <div id="functionParams" class="space-y-3">
+                <!-- Parameter Polinomial -->
+                <div class="function-param polynomial">
+                  <label class="block text-sm text-gray-600 mb-1">Koefisien x² (a)</label>
+                  <input type="range" min="-5" max="5" value="1" step="0.1" id="polyA" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>-5</span>
+                    <span id="polyAValue">1.0</span>
+                    <span>5</span>
+                  </div>
+                </div>
+
+                <div class="function-param polynomial">
+                  <label class="block text-sm text-gray-600 mb-1">Koefisien x (b)</label>
+                  <input type="range" min="-5" max="5" value="0" step="0.1" id="polyB" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>-5</span>
+                    <span id="polyBValue">0.0</span>
+                    <span>5</span>
+                  </div>
+                </div>
+
+                <div class="function-param polynomial">
+                  <label class="block text-sm text-gray-600 mb-1">Konstanta (c)</label>
+                  <input type="range" min="-5" max="5" value="0" step="0.1" id="polyC" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>-5</span>
+                    <span id="polyCValue">0.0</span>
+                    <span>5</span>
+                  </div>
+                </div>
+
+                <!-- Parameter Sinus -->
+                <div class="function-param sinus hidden">
+                  <label class="block text-sm text-gray-600 mb-1">Amplitudo (a)</label>
+                  <input type="range" min="-3" max="3" value="1" step="0.1" id="sinA" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>-3</span>
+                    <span id="sinAValue">1.0</span>
+                    <span>3</span>
+                  </div>
+                </div>
+
+                <div class="function-param sinus hidden">
+                  <label class="block text-sm text-gray-600 mb-1">Frekuensi (b)</label>
+                  <input type="range" min="0.1" max="5" value="1" step="0.1" id="sinB" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>0.1</span>
+                    <span id="sinBValue">1.0</span>
+                    <span>5</span>
+                  </div>
+                </div>
+
+                <!-- Parameter Eksponensial -->
+                <div class="function-param exponential hidden">
+                  <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
+                  <input type="range" min="0.1" max="3" value="1" step="0.1" id="expA" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>0.1</span>
+                    <span id="expAValue">1.0</span>
+                    <span>3</span>
+                  </div>
+                </div>
+
+                <div class="function-param exponential hidden">
+                  <label class="block text-sm text-gray-600 mb-1">Eksponen (b)</label>
+                  <input type="range" min="-1" max="1" value="0.5" step="0.1" id="expB" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>-1</span>
+                    <span id="expBValue">0.5</span>
+                    <span>1</span>
+                  </div>
+                </div>
+
+                <!-- Parameter Logaritma -->
+                <div class="function-param logarithm hidden">
+                  <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
+                  <input type="range" min="-3" max="3" value="1" step="0.1" id="logA" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>-3</span>
+                    <span id="logAValue">1.0</span>
+                    <span>3</span>
+                  </div>
+                </div>
+
+                <div class="function-param logarithm hidden">
+                  <label class="block text-sm text-gray-600 mb-1">Parameter (b)</label>
+                  <input type="range" min="0.1" max="3" value="1" step="0.1" id="logB" class="w-full" />
+                  <div class="flex justify-between text-xs text-gray-500">
+                    <span>0.1</span>
+                    <span id="logBValue">1.0</span>
+                    <span>3</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-medium text-gray-700 mb-2">Titik Garis Singgung</h3>
+              <div>
+                <label class="block text-sm text-gray-600 mb-1">Nilai x</label>
+                <input type="range" min="-5" max="5" value="1" step="0.1" id="tangentPoint" class="w-full" />
+                <div class="flex justify-between text-xs text-gray-500">
+                  <span>-5</span>
+                  <span id="tangentPointValue">1.0</span>
+                  <span>5</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-medium text-gray-700 mb-2">Rentang Grafik</h3>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-sm text-gray-600 mb-1">x min</label>
+                  <input type="number" id="xMin" value="-5" class="w-full p-2 border rounded outline-none transition-colors focus-visible" />
+                </div>
+                <div>
+                  <label class="block text-sm text-gray-600 mb-1">x max</label>
+                  <input type="number" id="xMax" value="5" class="w-full p-2 border rounded outline-none transition-colors focus-visible" />
+                </div>
+              </div>
+            </div>
+
+            <button id="resetBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible w-full">Reset ke Default</button>
+          </div>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <h3 class="font-semibold text-yellow-700 mb-2">Informasi Fungsi</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-gray-700"><span class="font-medium">Fungsi:</span> <span id="functionExpression">f(x) = x²</span></p>
+                <p class="text-sm text-gray-700 mt-1"><span class="font-medium">Turunan Pertama:</span> <span id="firstDerivative">f'(x) = 2x</span></p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-700"><span class="font-medium">Turunan Kedua:</span> <span id="secondDerivative">f''(x) = 2</span></p>
+                <p class="text-sm text-gray-700 mt-1"><span class="font-medium">Nilai di titik x:</span> <span id="functionValue">f(1) = 1</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 pilar -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Garis Singgung -->
             <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
               <h3 class="font-semibold text-blue-700 mb-2">Garis Singgung</h3>
@@ -249,24 +266,10 @@
               </div>
             </div>
           </div>
-
-          <div class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-            <h3 class="font-semibold text-yellow-700 mb-2">Informasi Fungsi</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p class="text-sm text-gray-700"><span class="font-medium">Fungsi:</span> <span id="functionExpression">f(x) = x²</span></p>
-                <p class="text-sm text-gray-700 mt-1"><span class="font-medium">Turunan Pertama:</span> <span id="firstDerivative">f'(x) = 2x</span></p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-700"><span class="font-medium">Turunan Kedua:</span> <span id="secondDerivative">f''(x) = 2</span></p>
-                <p class="text-sm text-gray-700 mt-1"><span class="font-medium">Nilai di titik x:</span> <span id="functionValue">f(1) = 1</span></p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
-      <section class="mt-8 bg-white lg:p-4 overflow-auto flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section class="mt-8 bg-white overflow-auto flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 min-w-full">
           <h3 class="text-lg font-semibold mb-2 text-blue-700">Garis Singgung</h3>
           <p class="text-sm text-gray-700">Garis lurus yang hanya menyentuh kurva di satu titik. Dalam gerak parabola, garis singgung di titik tertentu menunjukkan arah gerak benda pada titik tersebut.</p>
@@ -293,11 +296,9 @@
       <img class="absolute right-0 bottom-0 w-[15%] md:w-[5%]" src="video/chip.gif" alt="cip" />
     </a>
     <a href="./road.html">
-      <img class="absolute left-0 bottom-0 w-[25%] md:w-[10%]" src="video/bread.gif" alt="bread" />
+      <img class="absolute -left-5 -bottom-5 w-[25%] md:w-[10%]" src="video/bread.gif" alt="bread" />
     </a>
 
     <script src="./js/script.js"></script>
   </body>
 </html>
-
-
