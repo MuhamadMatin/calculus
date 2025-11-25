@@ -208,6 +208,24 @@
               </div>
             </div>
 
+            <!-- Kecepatan Sesaat -->
+            <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+              <h3 class="font-semibold text-red-700 mb-2">Kecepatan Sesaat</h3>
+              <p id="instantVelocityInfo" class="text-sm text-gray-700">Kecepatan sesaat: 2</p>
+              <button class="explanation-toggle mt-2 text-xs text-red-600 hover:text-red-800" data-target="velocityExplanation">Penjelasan & Langkah-langkah ▼</button>
+              <div id="velocityExplanation" class="explanation-content mt-2 text-xs text-gray-600">
+                <p class="mb-2">Kecepatan sesaat adalah laju perubahan posisi pada waktu tertentu. Dalam konteks fungsi matematika, ini sama dengan nilai turunan pertama pada titik tersebut.</p>
+                <p class="mb-2"><strong>Rumus:</strong> v(a) = f'(a)</p>
+                <p class="mb-2"><strong>Langkah-langkah:</strong></p>
+                <ol class="step-list pl-4">
+                  <li>Hitung turunan pertama f'(x)</li>
+                  <li>Substitusi x = a ke dalam f'(x)</li>
+                  <li>Nilai f'(a) adalah kecepatan sesaat pada titik x = a</li>
+                </ol>
+                <div id="velocityCalculation" class="mt-2 p-2 bg-red-100 rounded text-xs"></div>
+              </div>
+            </div>
+
             <!-- Kemonotonan -->
             <div class="bg-green-50 p-4 rounded-lg border border-green-200">
               <h3 class="font-semibold text-green-700 mb-2">Kemonotonan</h3>
@@ -247,24 +265,6 @@
                 <div id="concavityCalculation" class="mt-2 p-2 bg-purple-100 rounded text-xs"></div>
               </div>
             </div>
-
-            <!-- Kecepatan Sesaat -->
-            <div class="bg-red-50 p-4 rounded-lg border border-red-200">
-              <h3 class="font-semibold text-red-700 mb-2">Kecepatan Sesaat</h3>
-              <p id="instantVelocityInfo" class="text-sm text-gray-700">Kecepatan sesaat: 2</p>
-              <button class="explanation-toggle mt-2 text-xs text-red-600 hover:text-red-800" data-target="velocityExplanation">Penjelasan & Langkah-langkah ▼</button>
-              <div id="velocityExplanation" class="explanation-content mt-2 text-xs text-gray-600">
-                <p class="mb-2">Kecepatan sesaat adalah laju perubahan posisi pada waktu tertentu. Dalam konteks fungsi matematika, ini sama dengan nilai turunan pertama pada titik tersebut.</p>
-                <p class="mb-2"><strong>Rumus:</strong> v(a) = f'(a)</p>
-                <p class="mb-2"><strong>Langkah-langkah:</strong></p>
-                <ol class="step-list pl-4">
-                  <li>Hitung turunan pertama f'(x)</li>
-                  <li>Substitusi x = a ke dalam f'(x)</li>
-                  <li>Nilai f'(a) adalah kecepatan sesaat pada titik x = a</li>
-                </ol>
-                <div id="velocityCalculation" class="mt-2 p-2 bg-red-100 rounded text-xs"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -275,13 +275,13 @@
           <p class="text-sm text-gray-700">Garis lurus yang hanya menyentuh kurva di satu titik. Dalam gerak parabola, garis singgung di titik tertentu menunjukkan arah gerak benda pada titik tersebut.</p>
         </div>
 
-        <div class="bg-green-50 p-4 rounded-lg border border-green-200 min-w-full">
-          <h3 class="text-lg font-semibold mb-2 text-green-700">Kecepatan Sesaat</h3>
+        <div class="bg-red-50 p-4 rounded-lg border border-red-200 min-w-full">
+          <h3 class="text-lg font-semibold mb-2 text-red-700">Kecepatan Sesaat</h3>
           <p class="text-sm text-gray-700">Nilai turunan pertama dari fungsi posisi terhadap waktu. Dalam game, kecepatan sesaat panah berubah setiap saat karena pengaruh gravitasi.</p>
         </div>
 
-        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 min-w-full">
-          <h3 class="text-lg font-semibold mb-2 text-yellow-700">Kemonotonan</h3>
+        <div class="bg-green-50 p-4 rounded-lg border border-green-200 min-w-full">
+          <h3 class="text-lg font-semibold mb-2 text-green-700">Kemonotonan</h3>
           <p class="text-sm text-gray-700">Sifat fungsi yang menggambarkan apakah fungsi tersebut naik, turun, atau konstan. Dalam lintasan panah, kemonotonan berubah dari naik ke turun.</p>
         </div>
 
