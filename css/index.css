@@ -6,6 +6,56 @@ body {
   min-height: 100vh;
 }
 
+/* Animasi untuk navbar */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar-animation {
+  animation: fadeInDown 0.5s ease-out;
+}
+
+/* Efek hover untuk link navbar */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Efek untuk tombol mobile menu */
+.mobile-menu-button {
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-button.active {
+  transform: rotate(90deg);
+}
+
 .explanation-content {
   max-height: 0;
   overflow: hidden;
