@@ -13,6 +13,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="./css/index.css" />
+    <style>
+      .number-input {
+        width: 80px;
+        padding: 4px 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .input-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    </style>
   </head>
   <body class="bg-gray-100 min-h-screen relative">
     <nav class="bg-white shadow-md sticky top-0 z-40">
@@ -42,7 +57,6 @@
     <main class="my-6 max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 lg:gap-6">
-          <!-- <div class="lg:col-span-2"> -->
           <!-- Grafik -->
           <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6 lg:col-span-2">
             <div id="chart" class="md:h-72 h-80 lg:h-full"></div>
@@ -52,7 +66,7 @@
           <div class="p-4 bg-white border border-gray-200 rounded-lg h-fit lg:col-span-1">
             <div class="mb-6">
               <h3 class="font-medium text-gray-700 mb-2">Jenis Fungsi</h3>
-              <select id="functionType" class="w-full p-2 border rounded bg-white">
+              <select id="functionType" class="w-full p-2 border rounded outline-none transition-colors focus-visible">
                 <option value="polynomial">Polinomial (ax² + bx + c)</option>
                 <option value="sinus">Sinus (a sin(bx))</option>
                 <option value="exponential">Eksponensial (a e^(bx))</option>
@@ -66,94 +80,139 @@
                 <!-- Parameter Polinomial -->
                 <div class="function-param polynomial">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien x² (a)</label>
-                  <input type="range" min="-5" max="5" value="1" step="0.1" id="polyA" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>-5</span>
-                    <span id="polyAValue">1.0</span>
-                    <span>5</span>
+                  <div class="input-group">
+                    <div class="w-full flex-1">
+                      <input type="range" min="-5" max="5" value="1" step="0.1" id="polyA" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>-5</span>
+                        <span id="polyAValue">1.0</span>
+                        <span>5</span>
+                      </div>
+                    </div>
+                    <input type="number" min="-5" max="5" value="1" step="0.1" id="polyANum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <div class="function-param polynomial">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien x (b)</label>
-                  <input type="range" min="-5" max="5" value="0" step="0.1" id="polyB" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>-5</span>
-                    <span id="polyBValue">0.0</span>
-                    <span>5</span>
+                  <div class="input-group">
+                    <div class="flex-1 w-full">
+                      <input type="range" min="-5" max="5" value="0" step="0.1" id="polyB" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>-5</span>
+                        <span id="polyBValue">0.0</span>
+                        <span>5</span>
+                      </div>
+                    </div>
+                    <input type="number" min="-5" max="5" value="0" step="0.1" id="polyBNum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <div class="function-param polynomial">
                   <label class="block text-sm text-gray-600 mb-1">Konstanta (c)</label>
-                  <input type="range" min="-5" max="5" value="0" step="0.1" id="polyC" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>-5</span>
-                    <span id="polyCValue">0.0</span>
-                    <span>5</span>
+                  <div class="input-group">
+                    <div class="w-full flex-1">
+                      <input type="range" min="-5" max="5" value="0" step="0.1" id="polyC" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>-5</span>
+                        <span id="polyCValue">0.0</span>
+                        <span>5</span>
+                      </div>
+                    </div>
+                    <input type="number" min="-5" max="5" value="0" step="0.1" id="polyCNum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <!-- Parameter Sinus -->
                 <div class="function-param sinus hidden">
                   <label class="block text-sm text-gray-600 mb-1">Amplitudo (a)</label>
-                  <input type="range" min="-3" max="3" value="1" step="0.1" id="sinA" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>-3</span>
-                    <span id="sinAValue">1.0</span>
-                    <span>3</span>
+                  <div class="input-group">
+                    <div class="flex-1 w-full">
+                      <input type="range" min="-3" max="3" value="1" step="0.1" id="sinA" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>-3</span>
+                        <span id="sinAValue">1.0</span>
+                        <span>3</span>
+                      </div>
+                    </div>
+                    <input type="number" min="-3" max="3" value="1" step="0.1" id="sinANum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <div class="function-param sinus hidden">
                   <label class="block text-sm text-gray-600 mb-1">Frekuensi (b)</label>
-                  <input type="range" min="0.1" max="5" value="1" step="0.1" id="sinB" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>0.1</span>
-                    <span id="sinBValue">1.0</span>
-                    <span>5</span>
+                  <div class="input-group">
+                    <div class="flex-1 w-full">
+                      <input type="range" min="0.1" max="5" value="1" step="0.1" id="sinB" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>0.1</span>
+                        <span id="sinBValue">1.0</span>
+                        <span>5</span>
+                      </div>
+                    </div>
+                    <input type="number" min="0.1" max="5" value="1" step="0.1" id="sinBNum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <!-- Parameter Eksponensial -->
                 <div class="function-param exponential hidden">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
-                  <input type="range" min="0.1" max="3" value="1" step="0.1" id="expA" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>0.1</span>
-                    <span id="expAValue">1.0</span>
-                    <span>3</span>
+                  <div class="input-group">
+                    <div class="flex-1 w-full">
+                      <input type="range" min="0.1" max="3" value="1" step="0.1" id="expA" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>0.1</span>
+                        <span id="expAValue">1.0</span>
+                        <span>3</span>
+                      </div>
+                    </div>
+                    <input type="number" min="0.1" max="3" value="1" step="0.1" id="expANum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <div class="function-param exponential hidden">
                   <label class="block text-sm text-gray-600 mb-1">Eksponen (b)</label>
-                  <input type="range" min="-1" max="1" value="0.5" step="0.1" id="expB" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>-1</span>
-                    <span id="expBValue">0.5</span>
-                    <span>1</span>
+                  <div class="input-group">
+                    <div class="w-full flex-1">
+                      <input type="range" min="-1" max="1" value="0.5" step="0.1" id="expB" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>-1</span>
+                        <span id="expBValue">0.5</span>
+                        <span>1</span>
+                      </div>
+                    </div>
+                    <input type="number" min="-1" max="1" value="0.5" step="0.1" id="expBNum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <!-- Parameter Logaritma -->
                 <div class="function-param logarithm hidden">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
-                  <input type="range" min="-3" max="3" value="1" step="0.1" id="logA" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>-3</span>
-                    <span id="logAValue">1.0</span>
-                    <span>3</span>
+                  <div class="input-group">
+                    <div class="flex-1 w-full">
+                      <input type="range" min="-3" max="3" value="1" step="0.1" id="logA" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>-3</span>
+                        <span id="logAValue">1.0</span>
+                        <span>3</span>
+                      </div>
+                    </div>
+                    <input type="number" min="-3" max="3" value="1" step="0.1" id="logANum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
 
                 <div class="function-param logarithm hidden">
                   <label class="block text-sm text-gray-600 mb-1">Parameter (b)</label>
-                  <input type="range" min="0.1" max="3" value="1" step="0.1" id="logB" class="w-full" />
-                  <div class="flex justify-between text-xs text-gray-500">
-                    <span>0.1</span>
-                    <span id="logBValue">1.0</span>
-                    <span>3</span>
+                  <div class="input-group">
+                    <div class="flex-1 w-full">
+                      <input type="range" min="0.1" max="3" value="1" step="0.1" id="logB" class="w-full" />
+                      <div class="flex justify-between text-xs text-gray-500">
+                        <span>0.1</span>
+                        <span id="logBValue">1.0</span>
+                        <span>3</span>
+                      </div>
+                    </div>
+                    <input type="number" min="0.1" max="3" value="1" step="0.1" id="logBNum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                   </div>
                 </div>
               </div>
@@ -163,11 +222,16 @@
               <h3 class="font-medium text-gray-700 mb-2">Titik Garis Singgung</h3>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Nilai x</label>
-                <input type="range" min="-5" max="5" value="1" step="0.1" id="tangentPoint" class="w-full" />
-                <div class="flex justify-between text-xs text-gray-500">
-                  <span>-5</span>
-                  <span id="tangentPointValue">1.0</span>
-                  <span>5</span>
+                <div class="input-group">
+                  <div class="flex-1 w-full">
+                    <input type="range" min="-5" max="5" value="1" step="0.1" id="tangentPoint" class="w-full" />
+                    <div class="flex justify-between text-xs text-gray-500">
+                      <span>-5</span>
+                      <span id="tangentPointValue">1.0</span>
+                      <span>5</span>
+                    </div>
+                  </div>
+                  <input type="number" min="-5" max="5" value="1" step="0.1" id="tangentPointNum" class="p-2 border rounded outline-none transition-colors focus-visible" />
                 </div>
               </div>
             </div>
@@ -310,13 +374,6 @@
         </div>
       </section>
     </main>
-
-    <!-- <a href="./archer.html">
-      <img class="absolute right-0 bottom-0 w-[15%] md:w-[5%]" src="video/chip.gif" alt="cip" />
-    </a>
-    <a href="./road.html">
-      <img class="absolute -left-5 -bottom-5 w-[25%] md:w-[10%]" src="video/bread.gif" alt="bread" />
-    </a> -->
 
     <footer class="py-8 mt-12">
       <div class="flex items-center justify-center gap-2">

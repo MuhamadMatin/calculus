@@ -70,6 +70,33 @@ const functions = {
   },
 };
 
+// Fungsi untuk sinkronisasi slider dan input angka
+function syncSliderAndNumber(sliderId, numberId) {
+  const slider = document.getElementById(sliderId);
+  const number = document.getElementById(numberId);
+
+  // Sinkronisasi dari slider ke input angka
+  slider.addEventListener('input', function () {
+    number.value = this.value;
+    updateValues();
+  });
+
+  // Sinkronisasi dari input angka ke slider
+  number.addEventListener('input', function () {
+    let value = parseFloat(this.value);
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+
+    // Validasi nilai
+    if (isNaN(value)) return;
+    if (value < min) value = min;
+    if (value > max) value = max;
+
+    slider.value = value;
+    updateValues();
+  });
+}
+
 // Fungsi untuk memperbarui tampilan
 function updateValues() {
   functionType = document.getElementById('functionType').value;
@@ -418,13 +445,31 @@ function setupExplanationToggles() {
   });
 }
 
+// Setup sinkronisasi slider dan input angka
+function setupSliderNumberSync() {
+  // Polinomial
+  syncSliderAndNumber('polyA', 'polyANum');
+  syncSliderAndNumber('polyB', 'polyBNum');
+  syncSliderAndNumber('polyC', 'polyCNum');
+
+  // Sinus
+  syncSliderAndNumber('sinA', 'sinANum');
+  syncSliderAndNumber('sinB', 'sinBNum');
+
+  // Eksponensial
+  syncSliderAndNumber('expA', 'expANum');
+  syncSliderAndNumber('expB', 'expBNum');
+
+  // Logaritma
+  syncSliderAndNumber('logA', 'logANum');
+  syncSliderAndNumber('logB', 'logBNum');
+
+  // Titik garis singgung
+  syncSliderAndNumber('tangentPoint', 'tangentPointNum');
+}
+
 // Event listeners
 document.getElementById('functionType').addEventListener('change', showFunctionParams);
-
-// Event listeners untuk slider
-document.querySelectorAll('input[type="range"]').forEach((slider) => {
-  slider.addEventListener('input', updateValues);
-});
 
 // Event listeners untuk rentang grafik
 document.getElementById('xMin').addEventListener('change', updateValues);
@@ -452,9 +497,26 @@ document.getElementById('resetBtn').addEventListener('click', function () {
   document.getElementById('xMin').value = -5;
   document.getElementById('xMax').value = 5;
 
+  // Update nilai input angka juga
+  document.getElementById('polyANum').value = 1;
+  document.getElementById('polyBNum').value = 0;
+  document.getElementById('polyCNum').value = 0;
+
+  document.getElementById('sinANum').value = 1;
+  document.getElementById('sinBNum').value = 1;
+
+  document.getElementById('expANum').value = 1;
+  document.getElementById('expBNum').value = 0.5;
+
+  document.getElementById('logANum').value = 1;
+  document.getElementById('logBNum').value = 1;
+
+  document.getElementById('tangentPointNum').value = 1;
+
   showFunctionParams();
 });
 
 // Inisialisasi
 showFunctionParams();
 setupExplanationToggles();
+setupSliderNumberSync();
