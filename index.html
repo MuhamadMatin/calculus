@@ -13,21 +13,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="./css/index.css" />
-    <style>
-      .number-input {
-        width: 80px;
-        padding: 4px 8px;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        text-align: center;
-        font-size: 14px;
-      }
-      .input-group {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-    </style>
   </head>
   <body class="bg-gray-100 min-h-screen relative">
     <nav class="bg-white shadow-md sticky top-0 z-40">
@@ -41,8 +26,7 @@
             <!-- Menu Desktop -->
             <div class="flex items-center space-x-4">
               <a href="./index.html" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">Home</a>
-              <a href="./archer.html" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">Archer</a>
-              <a href="./road.html" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">Road</a>
+              <a href="./basket.html" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">Basket</a>
             </div>
           </div>
         </div>
@@ -80,7 +64,7 @@
                 <!-- Parameter Polinomial -->
                 <div class="function-param polynomial">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien x² (a)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="w-full flex-1">
                       <input type="range" min="-5" max="5" value="1" step="0.1" id="polyA" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -95,7 +79,7 @@
 
                 <div class="function-param polynomial">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien x (b)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="flex-1 w-full">
                       <input type="range" min="-5" max="5" value="0" step="0.1" id="polyB" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -110,7 +94,7 @@
 
                 <div class="function-param polynomial">
                   <label class="block text-sm text-gray-600 mb-1">Konstanta (c)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="w-full flex-1">
                       <input type="range" min="-5" max="5" value="0" step="0.1" id="polyC" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -126,7 +110,7 @@
                 <!-- Parameter Sinus -->
                 <div class="function-param sinus hidden">
                   <label class="block text-sm text-gray-600 mb-1">Amplitudo (a)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="flex-1 w-full">
                       <input type="range" min="-3" max="3" value="1" step="0.1" id="sinA" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -141,7 +125,7 @@
 
                 <div class="function-param sinus hidden">
                   <label class="block text-sm text-gray-600 mb-1">Frekuensi (b)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="flex-1 w-full">
                       <input type="range" min="0.1" max="5" value="1" step="0.1" id="sinB" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -157,7 +141,7 @@
                 <!-- Parameter Eksponensial -->
                 <div class="function-param exponential hidden">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="flex-1 w-full">
                       <input type="range" min="0.1" max="3" value="1" step="0.1" id="expA" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -172,7 +156,7 @@
 
                 <div class="function-param exponential hidden">
                   <label class="block text-sm text-gray-600 mb-1">Eksponen (b)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="w-full flex-1">
                       <input type="range" min="-1" max="1" value="0.5" step="0.1" id="expB" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -188,7 +172,7 @@
                 <!-- Parameter Logaritma -->
                 <div class="function-param logarithm hidden">
                   <label class="block text-sm text-gray-600 mb-1">Koefisien (a)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="flex-1 w-full">
                       <input type="range" min="-3" max="3" value="1" step="0.1" id="logA" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -203,7 +187,7 @@
 
                 <div class="function-param logarithm hidden">
                   <label class="block text-sm text-gray-600 mb-1">Parameter (b)</label>
-                  <div class="input-group">
+                  <div class="flex items-center gap-2">
                     <div class="flex-1 w-full">
                       <input type="range" min="0.1" max="3" value="1" step="0.1" id="logB" class="w-full" />
                       <div class="flex justify-between text-xs text-gray-500">
@@ -222,7 +206,7 @@
               <h3 class="font-medium text-gray-700 mb-2">Titik Garis Singgung</h3>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Nilai x</label>
-                <div class="input-group">
+                <div class="flex items-center gap-2">
                   <div class="flex-1 w-full">
                     <input type="range" min="-5" max="5" value="1" step="0.1" id="tangentPoint" class="w-full" />
                     <div class="flex justify-between text-xs text-gray-500">
@@ -250,7 +234,7 @@
               </div>
             </div>
 
-            <button id="resetBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible w-full">Reset ke Default</button>
+            <button id="resetBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible w-full">Reset</button>
           </div>
         </div>
         <div class="lg:col-span-3">
@@ -275,9 +259,8 @@
               <h3 class="font-semibold text-blue-700 mb-2">Garis Singgung</h3>
               <p id="tangentInfo" class="text-sm text-gray-700">Persamaan: y = x</p>
               <p id="slopeInfo" class="text-sm text-gray-700 mt-1">Kemiringan: 1</p>
-              <button class="explanation-toggle mt-2 text-xs text-blue-600 hover:text-blue-800" data-target="tangentExplanation">Penjelasan & Langkah-langkah ▼</button>
+              <button class="explanation-toggle mt-2 text-xs text-blue-600 hover:text-blue-800" data-target="tangentExplanation">Langkah-langkah ▼</button>
               <div id="tangentExplanation" class="explanation-content mt-2 text-xs text-gray-600">
-                <p class="mb-2">Garis singgung adalah garis lurus yang menyentuh kurva di satu titik tanpa memotongnya. Garis ini mewakili kemiringan kurva pada titik tersebut.</p>
                 <p class="mb-2"><strong>Rumus:</strong> y - f(a) = f'(a)(x - a)</p>
                 <p class="mb-2"><strong>Langkah-langkah:</strong></p>
                 <ol class="step-list pl-4">
@@ -295,9 +278,8 @@
             <div class="bg-red-50 p-4 rounded-lg border border-red-200">
               <h3 class="font-semibold text-red-700 mb-2">Kecepatan Sesaat</h3>
               <p id="instantVelocityInfo" class="text-sm text-gray-700">Kecepatan sesaat: 2</p>
-              <button class="explanation-toggle mt-2 text-xs text-red-600 hover:text-red-800" data-target="velocityExplanation">Penjelasan & Langkah-langkah ▼</button>
+              <button class="explanation-toggle mt-2 text-xs text-red-600 hover:text-red-800" data-target="velocityExplanation">Langkah-langkah ▼</button>
               <div id="velocityExplanation" class="explanation-content mt-2 text-xs text-gray-600">
-                <p class="mb-2">Kecepatan sesaat adalah laju perubahan posisi pada waktu tertentu. Dalam konteks fungsi matematika, ini sama dengan nilai turunan pertama pada titik tersebut.</p>
                 <p class="mb-2"><strong>Rumus:</strong> v(a) = f'(a)</p>
                 <p class="mb-2"><strong>Langkah-langkah:</strong></p>
                 <ol class="step-list pl-4">
@@ -313,9 +295,8 @@
             <div class="bg-green-50 p-4 rounded-lg border border-green-200">
               <h3 class="font-semibold text-green-700 mb-2">Kemonotonan</h3>
               <p id="monotonicityInfo" class="text-sm text-gray-700">Fungsi naik di sekitar titik ini</p>
-              <button class="explanation-toggle mt-2 text-xs text-green-600 hover:text-green-800" data-target="monotonicityExplanation">Penjelasan & Langkah-langkah ▼</button>
+              <button class="explanation-toggle mt-2 text-xs text-green-600 hover:text-green-800" data-target="monotonicityExplanation">Langkah-langkah ▼</button>
               <div id="monotonicityExplanation" class="explanation-content mt-2 text-xs text-gray-600">
-                <p class="mb-2">Kemonotonan menggambarkan apakah suatu fungsi naik, turun, atau konstan pada interval tertentu.</p>
                 <p class="mb-2"><strong>Rumus:</strong> <br />- f'(x) > 0 → fungsi naik <br />- f'(x) < 0 → fungsi turun <br />- f'(x) = 0 → fungsi stasioner</p>
                 <p class="mb-2"><strong>Langkah-langkah:</strong></p>
                 <ol class="step-list pl-4">
@@ -333,9 +314,8 @@
             <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
               <h3 class="font-semibold text-purple-700 mb-2">Kecekungan</h3>
               <p id="concavityInfo" class="text-sm text-gray-700">Fungsi cekung ke atas di sekitar titik ini</p>
-              <button class="explanation-toggle mt-2 text-xs text-purple-600 hover:text-purple-800" data-target="concavityExplanation">Penjelasan & Langkah-langkah ▼</button>
+              <button class="explanation-toggle mt-2 text-xs text-purple-600 hover:text-purple-800" data-target="concavityExplanation">Langkah-langkah ▼</button>
               <div id="concavityExplanation" class="explanation-content mt-2 text-xs text-gray-600">
-                <p class="mb-2">Kecekungan menggambarkan arah lengkungan grafik fungsi. Fungsi dapat cekung ke atas (seperti mangkuk) atau cekung ke bawah (seperti bukit).</p>
                 <p class="mb-2"><strong>Rumus:</strong> <br />- f''(x) > 0 → cekung ke atas <br />- f''(x) < 0 → cekung ke bawah <br />- f''(x) = 0 → titik belok (mungkin)</p>
                 <p class="mb-2"><strong>Langkah-langkah:</strong></p>
                 <ol class="step-list pl-4">
