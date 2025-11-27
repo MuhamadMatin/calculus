@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shooting | Garis Singgung & Kecepatan sesaat</title>
+    <meta name="description" content="Game edukasi tentang konsep garis singgung, kecepatan sesaat melalui simulasi lemparan bola basket yang menyenangkan" />
+    <meta name="keywords" content="game edukasi, garis singgung, kecepatan sesaat, kemonotonan, kecekungan, bola basket, kalkulus" />
+    <meta name="author" content="Matematika Interaktif" />
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏀</text></svg>" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body class="bg-gray-100 min-h-screen relative">
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between lg:justify-start items-center h-16">
+          <!-- Logo -->
+          <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+            <span class="text-white font-bold text-lg">ƒ</span>
+          </div>
+          <div class="flex items-center">
+            <!-- Menu Desktop -->
+            <div class="flex items-center space-x-4">
+              <a href="./index.html" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">Home</a>
+              <a href="./basket.html" class="nav-link px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">Basket</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="mt-6">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Shoot it</h1>
+      <p class="text-center text-gray-600">Lempar aja ke ring</p>
+    </header>
+
+    <main class="my-6 max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2">
+          <div class="bg-white p-4 rounded-lg border border-gray-200 relative overflow-hidden">
+            <div class="flex justify-between mb-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800" id="score">0</div>
+                <div class="text-sm text-gray-600">Skor</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800" id="shots">0</div>
+                <div class="text-sm text-gray-600">Lemparan</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800" id="accuracy">0%</div>
+                <div class="text-sm text-gray-600">Akurasi</div>
+              </div>
+            </div>
+
+            <!-- Canvas Game -->
+            <div class="relative bg-gray-100 rounded-lg overflow-hidden" style="height: 400px">
+              <canvas id="gameCanvas" width="800" height="400" class="w-full h-full"></canvas>
+
+              <!-- Bola Basket -->
+              <div id="ball" class="absolute left-5 top-48 md:left-10 md:top-1/2 transform -translate-y-1/2 z-10">
+                <div class="basketball">
+                  <div class="line"></div>
+                  <div class="curve"></div>
+                  <div class="curve"></div>
+                </div>
+              </div>
+
+              <!-- Popup Sukses -->
+              <div id="successPopup" class="success-popup absolute inset-0 flex items-center justify-center hidden">
+                <div class="bg-green-500 text-white text-xl font-bold py-3 px-6 rounded-full shadow-lg">SWISH! +10 Poin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-1 p-4 border border-gray-200 rounded-lg">
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Sudut Lemparan (θ)</label>
+              <input type="range" id="angle" min="0" max="90" value="45" class="w-full" />
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>0°</span>
+                <span id="angleValue">45°</span>
+                <span>90°</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Kecepatan Awal (v₀)</label>
+              <input type="range" id="velocity" min="10" max="100" value="50" class="w-full" />
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>10 m/s</span>
+                <span id="velocityValue">50 m/s</span>
+                <span>100 m/s</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Gravitasi (g)</label>
+              <input type="range" id="gravity" min="5" max="15" value="10" step="0.5" class="w-full" />
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>5 m/s²</span>
+                <span id="gravityValue">10 m/s²</span>
+                <span>15 m/s²</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <button id="shootBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded transition-colors focus-visible">Lempar!</button>
+              <button id="resetBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 rounded transition-colors focus-visible">Reset</button>
+            </div>
+
+            <div class="mt-6 rounded-lg">
+              <h3 class="text-lg font-medium text-gray-700 mb-3 text-center">Analisis</h3>
+              <div class="space-y-2 text-sm">
+                <div class="flex flex-col w-full">
+                  <span class="text-gray-600">Persamaan Lintasan:</span>
+                  <span id="trajectoryEq" class="font-mono text-gray-800 text-end">y = x - 0.02x²</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kecepatan Sesaat (Vx):</span>
+                  <span id="instantVx" class="font-mono text-gray-800">35.36 m/s</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kecepatan Sesaat (Vy):</span>
+                  <span id="instantVy" class="font-mono text-gray-800">14.14 m/s</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Garis Singgung di Target:</span>
+                  <span id="tangentSlope" class="font-mono text-gray-800">m = 0.58</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kemonotonan:</span>
+                  <span id="monotonicity" class="font-medium text-green-600">Naik</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kecekungan:</span>
+                  <span id="concavity" class="font-medium text-red-600">Cekung Bawah</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-8 mt-12">
+      <div class="flex items-center justify-center gap-2">
+        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold">ƒ</span>
+        </div>
+        <p class="text-center text-sm text-blue-800">Kelompok 2 Kalkulus IF-05-06</p>
+      </div>
+    </footer>
+
+    <script src="./js/navbar.js"></script>
+    <script src="./js/basket.js"></script>
+  </body>
+</html>
